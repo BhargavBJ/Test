@@ -4,19 +4,15 @@
 <head>  
     <title>Dynamic Input Experiment</title>  
     <script>  
-        // Log "Hello, World!" to the console 
         console.log("Hello, World!");  
  
-        // Display "Hello, World!" on the webpage 
         document.addEventListener("DOMContentLoaded", function() { 
             document.body.innerHTML += "<h1>Hello, World!</h1>"; 
         }); 
  
-        // Read numbers from user input 
         let num1 = parseFloat(prompt("Enter the first number:"));  
         let num2 = parseFloat(prompt("Enter the second number:"));  
  
-        // Validate input and calculate sum 
         if (!isNaN(num1) && !isNaN(num2)) { 
             let sum = num1 + num2; 
             alert("The sum is: " + sum);  
