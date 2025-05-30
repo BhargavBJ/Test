@@ -8,7 +8,7 @@ data = california_data.frame
 correlation_matrix = data.corr()
 
 plt.figure(figsize=(10, 8))
-sns.heatmap(correlation_matrix, annot=True, cmap='hot', fmt='.2f', linewidths=0.5)
+sns.heatmap(correlation_matrix, annot=True, cmap='hot')
 plt.title('Correlation Matrix of California Housing Features')
 plt.show()
 
