@@ -8,15 +8,10 @@ iris = load_iris()
 data = iris.data
 labels = iris.target
 label_names = iris.target_names
-
-iris_df = pd.DataFrame(data, columns=iris.feature_names)
-
 pca = PCA(n_components=2)
 data_reduced = pca.fit_transform(data)
-
 reduced_df = pd.DataFrame(data_reduced, columns=['Principal Component 1', 'Principal Component 2'])
 reduced_df['Label'] = labels
-
 plt.figure(figsize=(8, 6))
 colors = ['r', 'g', 'b']
 
@@ -27,7 +22,6 @@ for i, label in enumerate(np.unique(labels)):
         subset['Principal Component 2'],
         label=label_names[label],
         color=colors[i],
-        edgecolor='k',
         s=60
     )
 
