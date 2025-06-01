@@ -1,0 +1,46 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+def kernel(point, x, k):
+    m = x.shape[0]
+    weights = np.eye(m)
+    for i in range(m):
+        diff = point - x[i]
+        weights[i, i] = np.exp(-(diff @ diff.T) / (2 * k**2))
+    return weights
+
+def local_weights(point, x, y, k):
+    w = kernel(point, x, k)
+    theta = np.linalg.inv(x.T @ w @ x) @ (x.T @ w @ y)
+    return theta
+
+def predict(x, y, k):
+    m = x.shape[0]
+    y_pred = np.zeros(m)
+    for i in range(m):
+        y_pred[i] = (x[i] @ local_weights(x[i], x, y, k)).item()
+    return y_pred
+
+def plot_results(x, y_pred, bill, tip, k):
+    order = x[:, 1].argsort()
+    x_sorted = x[order]
+    plt.scatter(bill, tip, color='green')
+    plt.plot(x_sorted[:, 1], y_pred[order], color='red', linewidth=2)
+    plt.xlabel('Total bill')
+    plt.ylabel('Tip')
+    plt.title(f'Locally Weighted Linear Regression (k={k})')
+    plt.show()
+
+data = pd.read_csv('/content/tip.csv')
+bill = np.array(data.total_bill, dtype=np.float64)
+tip = np.array(data.tip, dtype=np.float64)
+
+m = bill.shape[0]
+X = np.column_stack((np.ones(m), bill))
+y = tip.reshape(-1, 1)
+
+k = 3
+y_pred = predict(X, y, k)
+
+plot_results(X, y_pred, bill, tip, k)
