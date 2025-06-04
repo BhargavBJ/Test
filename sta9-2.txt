@@ -1,0 +1,37 @@
+package seleniumDay3; 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+import org.testng.annotations.AfterTest; 
+import org.testng.annotations.BeforeTest; 
+import org.testng.annotations.Test; 
+ 
+public class LoginDemoBlaze { 
+    WebDriver driver; 
+    @BeforeTest 
+    void openBrowser() { 
+        driver = new ChromeDriver(); 
+        driver.get("https://www.demoblaze.com/"); 
+        driver.manage().window().maximize(); 
+    } 
+    @Test(priority = 1) 
+    void login() throws InterruptedException { 
+        driver.findElement(By.id("login2")).click(); 
+        Thread.sleep(2000);  // Wait for the login modal to appear 
+        driver.findElement(By.id("loginusername")).sendKeys("testuser"); 
+        driver.findElement(By.id("loginpassword")).sendKeys("testpassword"); 
+        driver.findElement(By.xpath("//button[text()='Log in']")).click(); 
+        Thread.sleep(3000);  // Wait for login to process 
+        WebElement logoutButton = driver.findElement(By.id("logout2")); 
+        if (logoutButton.isDisplayed()) { 
+            System.out.println("User is successfully logged in"); 
+        } else { 
+            System.out.println("User login failed"); 
+        } 
+    } 
+    @AfterTest 
+    void closeBrowser() { 
+        driver.quit(); 
+    } 
+} 
