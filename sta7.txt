@@ -8,11 +8,12 @@ driver.get("https://www.saucedemo.com/");
 driver.findElement(By.id("user-name")).click(); //just for the click function 
 driver.manage().window().maximize(); 
 driver.findElement(By.id("user-name")).sendKeys("standard_user"); 
-driver.findElement(By.id("password")).sendKeys("secret_sauce1"); 
+driver.findElement(By.id("password")).sendKeys("secret_sauce"); 
 driver.findElement(By.className("submit-button")).click(); 
-boolean flag = driver.findElement(By.xpath("//button[text()=\"Open 
-Menu\"]")).isDisplayed(); 
+boolean flag = driver.findElement(By.xpath("//button[text()=\"Open Menu\"]")).isDisplayed(); 
 if (flag == true) 
-{System.out.println("Successfully logged in! hurRAY ");} 
-/*driver.close(); // terminate test window only 
-driver.quit(); //to Terminate all windows and test
+System.out.println("Successfully logged in! hurRAY ");
+driver.close(); 
+driver.quit(); 
+}
+}
