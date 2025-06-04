@@ -1,0 +1,21 @@
+import org.testng.annotations.Test; 
+import org.testng.Assert; 
+public class testNGFramework { 
+    @Test(priority=1) 
+    void openBrowser(){ 
+        System.out.println("Open browser"); 
+    } 
+    @Test(priority=2) 
+    void login(){ 
+        System.out.println("Login"); 
+    } 
+    @Test(priority=3) 
+    void addItem(){ 
+        System.out.println("Add item to cart"); 
+        Assert.assertEquals(5, 10, "Item count mismatch"); // This will fail
+    } 
+    @Test(priority=4) 
+    void close(){ 
+        System.out.println("Close browser"); 
+    } 
+}
