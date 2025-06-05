@@ -1,0 +1,26 @@
+WebUI.openBrowser('')
+WebUI.maximizeWindow()
+WebUI.navigateToUrl('https://www.wikipedia.org/')
+KeywordUtil.logInfo('Navigated to Wikipedia homepage')
+
+WebUI.verifyElementPresent(findTestObject('Object Repository/Page_Wikipedia/strong_English'), 10)
+WebUI.waitForElementClickable(findTestObject('Object Repository/Page_Wikipedia/strong_English'), 10)
+WebUI.click(findTestObject('Object Repository/Page_Wikipedia/strong_English'))
+KeywordUtil.logInfo('Clicked on English language link')
+
+WebUI.takeScreenshot()
+
+WebUI.click(findTestObject('Object Repository/Page_Wikipedia, the free encyclopedia/a_Wikipedia'))
+KeywordUtil.logInfo('Navigated to Wikipedia article')
+
+WebUI.delay(2)
+WebUI.takeScreenshot()
+
+WebUI.click(findTestObject('Object Repository/Page_Wikipedia/Wikipedia/a_History of Wikipedia'))
+KeywordUtil.logInfo('Navigated to history of wiki article')
+
+WebUI.comment('Test navigation completed successfully.')
+KeywordUtil.markPassed('Test case executed successfully.')
+
+WebUI.takeScreenshot()
+WebUI.closeBrowser()
