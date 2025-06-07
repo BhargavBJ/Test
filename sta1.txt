@@ -1,6 +1,0 @@
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI 
-WebUI.openBrowser('https://www.saucedemo.com/') 
-WebUI.setText(findTestObject('Object Repository/Page_Login/txt_username'), 'standard_user') 
-WebUI.setText(findTestObject('Object Repository/Page_Login/txt_password'), 'secret_sauce') 
-WebUI.click(findTestObject('Object Repository/Page_Login/btn_Login')) 
-WebUI.closeBrowser() 
