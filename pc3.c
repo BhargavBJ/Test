@@ -1,33 +1,31 @@
 #include <stdio.h>
 #include <omp.h>
-
-int fib(int n)
+int fib_task(int n)
 {
-    int x, y;
     if (n < 2)
         return n;
+    int x, y;
     #pragma omp task shared(x)
-    x = fib(n - 1);
+    x = fib_task(n - 1);
     #pragma omp task shared(y)
-    y = fib(n - 2);
+    y = fib_task(n - 2);
     #pragma omp taskwait
     return x + y;
 }
-
 int main()
 {
-    int n, res;
-    printf("Enter n: ");
+    int n;
+    printf("Enter number of Fibonacci terms:");
     scanf("%d", &n);
-    int i;
+    printf("Fibonacci Series:\n");
     #pragma omp parallel
     {
         #pragma omp single
         {
-            for (i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
-                res = fib(i);
-                printf("Fib(%d) = %d\n", i, res);
+                int result = fib_task(i);
+                printf("fib(%d)=%d\n", i, result);
             }
         }
     }
