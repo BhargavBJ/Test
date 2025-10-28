@@ -26,4 +26,7 @@ int main(int argc, char **argv)
     }
     MPI_Finalize();
     return 0;
-  }
+}
+
+// mpicc pc5.c -o pc5
+//mpirun -oversubscribe -np 6 ./p5
