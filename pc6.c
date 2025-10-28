@@ -24,3 +24,5 @@ int main(int argc, char **argv)
     MPI_Finalize();
     return 0;
 }
+//mpicc pc6.c -o pc6
+//mpirun -oversubscribe -np 2 ./pc6
