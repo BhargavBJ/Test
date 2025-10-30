@@ -1,0 +1,77 @@
+mongo --version
+#Linux:
+sudo systemctl start mongodb
+sudo systemctl enable mongodb
+#windows:
+mongo
+If successful, you’ll see:
+MongoDB shell version vX.X.X
+>
+🗄️ 3. Create and Use the Database
+use college_db
+
+
+Output:
+
+switched to db college_db
+
+🧾 4. Create a Collection and Insert Sample Documents
+db.student.insertMany([
+  { name: "Alice", age: 20, marks: 85, department: "CSE" },
+  { name: "Bob", age: 21, marks: 75, department: "ECE" },
+  { name: "Charlie", age: 22, marks: 90, department: "CSE" },
+  { name: "David", age: 20, marks: 60, department: "ME" },
+  { name: "Eva", age: 23, marks: 95, department: "ECE" },
+  { name: "Frank", age: 22, marks: 70, department: "CSE" },
+  { name: "Grace", age: 21, marks: 88, department: "ME" }
+])
+
+
+Check inserted data:
+
+db.student.find().pretty()
+
+🧮 5. Count Documents
+Count all documents:
+db.student.countDocuments()
+
+Count with a condition (e.g., marks > 80):
+db.student.countDocuments({ marks: { $gt: 80 } })
+
+🔢 6. Sort Documents
+Sort by marks descending:
+db.student.find().sort({ marks: -1 })
+
+Sort by name ascending and age descending:
+db.student.find().sort({ name: 1, age: -1 })
+
+🎯 7. Limit Results
+
+Return top 5 students:
+
+db.student.find().limit(5)
+
+⏭️ 8. Skip Documents
+
+Skip first 5 and get next 5:
+
+db.student.find().skip(5).limit(5)
+
+🧩 9. Aggregation Examples
+Group by Department and Count Students:
+db.student.aggregate([
+  { $group: { _id: "$department", totalStudents: { $sum: 1 } } }
+])
+
+Group by Department and Average Marks:
+db.student.aggregate([
+  { $group: { _id: "$department", avgMarks: { $avg: "$marks" } } }
+])
+
+Full Pipeline: Filter → Group → Sort → Limit
+db.student.aggregate([
+  { $match: { marks: { $gt: 60 } } },
+  { $group: { _id: "$department", avgMarks: { $avg: "$marks" } } },
+  { $sort: { avgMarks: -1 } },
+  { $limit: 3 }
+])
