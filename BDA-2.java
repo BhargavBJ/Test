@@ -93,6 +93,8 @@ public class MatMul {
 README Commands for Running MatMul Hadoop Job
 # 1. Change to the directory containing MatMul.jar and input files
 cd ~/Desktop/mat
+javac -classpath $(hadoop classpath) -d . MatMul.java
+jar -cvf MatMul.jar *.class
 
 # 2. Create an input directory in HDFS
 hadoop fs -mkdir -p /matin
