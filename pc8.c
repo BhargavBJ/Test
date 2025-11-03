@@ -11,15 +11,11 @@ int main(int argc, char** argv)
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     if (rank == 0) 
     {
-        for (int i = 0; i < size; i++) 
-        {
+        for (int i = 0; i < size; i++)
             data[i] = i * 10;
-        }
         printf("Process 0 initialized data: ");
         for (int i = 0; i < size; i++) 
-        {
             printf("%d ", data[i]);
-        }
         printf("\n");
     }
     MPI_Scatter(data, 1, MPI_INT, &recv_value, 1, MPI_INT, 0, MPI_COMM_WORLD);
@@ -30,9 +26,7 @@ int main(int argc, char** argv)
     {
         printf("Process 0 gathered data: ");
         for (int i = 0; i < size; i++) 
-        {
             printf("%d ", gathered[i]);
-        }
         printf("\n");
     }
     MPI_Finalize();
